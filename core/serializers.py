@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from rest_framework.relations import PrimaryKeyRelatedField
 
 from core.models import Country, CountryEconomy
 
@@ -20,7 +19,7 @@ class CountryEconomySerializer(serializers.HyperlinkedModelSerializer):
     def update(self, instance, validated_data):
         country_name = validated_data.pop('country')
         for (key, value) in validated_data.items():
-            setattr(instance,key,value)
+            setattr(instance, key, value)
 
         if country_name:
             country, _ = Country.objects.get_or_create(name=country_name['name'])

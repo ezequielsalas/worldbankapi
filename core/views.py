@@ -69,7 +69,6 @@ class CountryEconomyView(APIView):
             response['status_code'] = status.HTTP_201_CREATED
             response['status'] = 'success'
             response['message'] = 'The data was updated successfully'
-            # response['data'] = {'countryEconomies': CountryEconomySerializer(country_economy_saved).data}
-            response['data'] = {'countryEconomies': "CountryEconomySerializer(country_economy_saved).data"}
+            response['data'] = {'countryEconomies': CountryEconomySerializer(country_economy_saved).data}
 
         return Response(response)
