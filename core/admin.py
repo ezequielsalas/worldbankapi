@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from core.models import Country, CountryEconomy
+from core.models import Country, CountryData, Indicator
 
 admin.site.register(Country)
-admin.site.register(CountryEconomy)
+admin.site.register(Indicator)
+admin.site.register(CountryData)

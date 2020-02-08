@@ -1,8 +1,8 @@
 from django.urls import path
 
-from .views import CountryEconomyView
+from .views import CountryDataView
 
 urlpatterns = [
-    path('display_data/', CountryEconomyView.as_view(), None, "country_economy"),
-    path('display_data/<int:pk>', CountryEconomyView.as_view(), None, "country_economy"),
+    path('display_data/', CountryDataView.as_view(), None, "country_data"),
+    path('display_data/<int:pk>', CountryDataView.as_view(), None, "country_data"),
 ]
