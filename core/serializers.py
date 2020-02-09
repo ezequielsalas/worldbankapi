@@ -24,8 +24,9 @@ class CountryDataSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'country','indicator', 'year', 'value')
 
     def update(self, instance, validated_data):
-        country_name = validated_data.pop('country')
-        inidcator_code = validated_data.pop('indicator')
+        country_name = validated_data.pop('country', None)
+        indicator_code = validated_data.pop('indicator', None)
+
         for (key, value) in validated_data.items():
             setattr(instance, key, value)
 
@@ -33,8 +34,8 @@ class CountryDataSerializer(serializers.HyperlinkedModelSerializer):
             country, _ = Country.objects.get_or_create(name=country_name['name'])
             instance.country = country
 
-        if inidcator_code:
-            indicator, _ = Indicator.objects.get_or_create(code=inidcator_code['code'])
+        if indicator_code:
+            indicator, _ = Indicator.objects.get_or_create(code=indicator_code['code'])
             instance.indicator = indicator
 
         instance.save()
