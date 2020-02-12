@@ -6,6 +6,13 @@ from django.db import models
 class Country(models.Model):
     name = models.CharField(max_length=100)
 
+    @classmethod
+    def get_list_name(cls):
+        result = Country.objects.values_list("name", flat=True)
+        if result:
+            return list(result)
+        return []
+
     def __str__(self):
         return "{}".format(self.name)
 
@@ -13,6 +20,13 @@ class Country(models.Model):
 class Indicator(models.Model):
     name = models.CharField(max_length=100)
     code = models.CharField(max_length=100)
+
+    @classmethod
+    def get_list_name(cls):
+        result = Indicator.objects.values_list("name", flat=True)
+        if result:
+            return list(result)
+        return []
 
     def __str__(self):
         return "{}".format(self.name)

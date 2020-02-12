@@ -1,9 +1,10 @@
+from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.utils import json
 from rest_framework.response import Response
 
-from core.models import CountryData
+from core.models import CountryData, Country, Indicator
 from core.serializers import CountryDataSerializer
 
 
@@ -35,6 +36,7 @@ class CountryDataView(APIView):
             else:
                 response['status_code'] = status.HTTP_404_NOT_FOUND
                 response['status'] = 'failed'
+                response['data'] = []
                 response['message'] = 'Data not found'
                 return Response(response)
 
@@ -60,6 +62,7 @@ class CountryDataView(APIView):
         if country_data_obj is None:
             response['status_code'] = status.HTTP_404_NOT_FOUND
             response['status'] = 'failed'
+            response['data'] = []
             response['message'] = 'Country Data not found'
             return Response(response)
 
@@ -72,3 +75,12 @@ class CountryDataView(APIView):
             response['data'] = {'countryData': CountryDataSerializer(country_data_saved).data}
 
         return Response(response)
+
+
+def load_dropdown(request):
+    """
+    This endpoint is used to fill the dropdown in the table
+    """
+    countries = Country.get_list_name()
+    indicators = Indicator.get_list_name()
+    return JsonResponse({"countries": countries, "indicators":indicators})
