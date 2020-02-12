@@ -35,7 +35,7 @@ class Indicator(models.Model):
 class CountryData(models.Model):
     country = models.ForeignKey(Country, on_delete=models.DO_NOTHING)
     indicator = models.ForeignKey(Indicator, on_delete=models.DO_NOTHING)
-    value = models.DecimalField(max_digits=11, decimal_places=2)
+    value = models.DecimalField(max_digits=16, decimal_places=2, null=True, blank=True)
     year = models.IntegerField()
 
     def __str__(self):
